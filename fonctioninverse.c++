@@ -3,12 +3,12 @@
 #include <vector>
 
 // Fonction pour reconstruire une image à partir d'une liste 1 colonne
-cv::Mat reconstruireImage(const std::vector<int>& pixelValues, int width, int height) {
-    if (pixelValues.size() != width * height * 3) {
-        std::cerr << "Erreur : Taille invalide du tableau de pixels." << std::endl;
+cv::Mat reconstruireImage(const std::vector<int>& pixelValues) {
+    // Vérifier que la taille du vecteur est un multiple de 3
+    if (pixelValues.size() % 3 != 0) {
+        std::cerr << "Erreur : La taille du vecteur n'est pas valide pour une image à 3 canaux." << std::endl;
         return cv::Mat(); // Retourner une image vide en cas d'erreur
     }
-
     // Création des trois canaux B, G, R à partir des valeurs
     cv::Mat blueChannel(height, width, CV_8UC1);  // Canal Bleu
     cv::Mat greenChannel(height, width, CV_8UC1); // Canal Vert
